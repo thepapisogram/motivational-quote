@@ -1,101 +1,73 @@
-import Image from "next/image";
+"use client"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import clsx from "clsx";
+import CanvasAnimation from "./components/CanvasAnimation";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [quote, setQuote] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const fetchQuote = async () => {
+    setLoading(true);
+    // const category = "happiness";
+    try {
+      // const response = await axios.get(`https://api.api-ninjas.com/v1/quotes?category=${category}`, {
+      const response = await axios.get(`https://api.api-ninjas.com/v1/quotes`, {
+        headers: { "X-Api-Key": "TSachIi2Fnqhq/aDCmif0w==kwf8v9w6p6jiSvl4" },
+      });
+      setQuote(response.data[0]); // Assuming the API returns an array of quotes
+      setLoading(false)
+    } catch (err) {
+      setLoading(false);
+      setError(err.response ? err.response.data : "An error occurred");
+    }
+  };
+
+  useEffect(() => {
+    fetchQuote();
+  }, []);
+
+  return (
+    <>
+      <CanvasAnimation />
+      <main className="flex flex-col fixed top-0 left-0 h-full w-full bg-transparent z-20">
+        <div className={clsx("my-auto mx-auto p-10 rounded-2xl drop-shadow-lg bg-white dark:bg-zinc-950 backdrop-blur-md w-11/12 md:w-6/12 lg:w-4/12 xl:w-5/12 duration-500 transition-all",
+          {
+            "-rotate-6 bg-opacity-30 dark:bg-opacity-30": loading,
+            "bg-opacity-80 dark:bg-opacity-80": !loading
+          }
+        )}>
+          <h1 className="text-center text-3xl font-bold dark:text-green-600 tracking-wide">Motivational Quotes</h1>
+          {!loading && (
+            <section className="my-5">
+              <blockquote className="text-center text-lg dark:text-white dark:opacity-70">{`"${quote.quote}"`}</blockquote>
+              <p className="mt-3 text-lg text-right font-bold dark:text-green-600">{`- ${quote.author}`}</p>
+            </section>
+          )}
+          {loading && (
+            <div className="flex flex-col items-center gap-2 my-5">
+
+              <span className="loading loading-bars loading-sm"></span>
+              <div className="skeleton bg-green-950 opacity-80 h-4 w-full mt-3"></div>
+              <div className="skeleton bg-green-950 opacity-80 h-4 w-full"></div>
+              <div className="skeleton bg-green-950 opacity-80 h-4 w-full"></div>
+              <div className="skeleton bg-green-950 opacity-80 h-4 w-full"></div>
+            </div>
+          )}
+          <div className="grid">
+            {!loading && (
+              <audio autoPlay loop preload="auto">
+                <source src="/sound.mp3" type="audio/mpeg" />
+                Your browser does not support the audio element.
+              </audio>
+            )}
+            <button onClick={fetchQuote} className="bg-green-800 hover:bg-green-950 duration-400 text-white p-2 px-10 rounded-full transition-all">Refresh</button>
+            <p className="mt-4 text-center opacity-50 dark:opacity-20 tracking-widest font-bold text-black dark:text-white">Developed by Anthony Saah</p>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
