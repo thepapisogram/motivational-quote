@@ -1,7 +1,7 @@
-import { Inter } from "next/font/google";
+import { Rubik } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ weight: "400", subsets: ['latin']});
+const inter = Rubik({ weight: "400", subsets: ['latin']});
 
 export const metadata = {
   title: "Motivational Quote",

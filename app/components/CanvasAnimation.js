@@ -4,7 +4,7 @@ const CanvasAnimation = () => {
     const canvasRef = useRef(null);
     const circlesRef = useRef([]);
     const mouseRef = useRef({ x: undefined, y: undefined });
-    const colors = ["#B2C9AD", "#91AC8F", "#66785F", "#4B5945"];
+    const colors = ["#ccc", "#038934", "#222"];
     const maxRadius = 40;
 
     // Initialize circles
@@ -19,14 +19,15 @@ const CanvasAnimation = () => {
         const { innerWidth, innerHeight } = window;
         canvas.width = innerWidth;
         canvas.height = innerHeight;
-        canvas.style.background = "linear-gradient(to right, #14532d, #164e63)";
+        canvas.style.background = "linear-gradient(to right, #1b6d39, #7ba4b5)";
+        // canvas.style.background = "linear-gradient(to right, #06190d, #05141a)";
 
         for (let i = 0; i < 100; i++) {
             const radius = Math.floor(Math.random() * 30);
             const x = Math.random() * (innerWidth - radius * 2) + radius;
             const y = Math.random() * (innerHeight - radius * 2) + radius;
-            const dx = (Math.random() - 0.5) * 4;
-            const dy = (Math.random() - 0.5) * 4;
+            const dx = (Math.random() - 0.5);
+            const dy = (Math.random() - 0.5);
             const color = colors[Math.floor(Math.random() * colors.length)];
 
             circles.push(new Circle(x, y, dx, dy, radius, color, context));
