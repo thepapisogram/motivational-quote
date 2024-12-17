@@ -20,7 +20,6 @@ const CanvasAnimation = () => {
         canvas.width = innerWidth;
         canvas.height = innerHeight;
         canvas.style.background = "linear-gradient(to right, #1b6d39, #7ba4b5)";
-        // canvas.style.background = "linear-gradient(to right, #06190d, #05141a)";
 
         for (let i = 0; i < 100; i++) {
             const radius = Math.floor(Math.random() * 30);
@@ -134,9 +133,10 @@ const CanvasAnimation = () => {
             window.removeEventListener("mousemove", handleMouseMove);
             window.removeEventListener("resize", handleResize);
         };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return <canvas ref={canvasRef} style={{ background: "white" }} />;
+    return <canvas data-aos="fade-in" data-aos-duration="3000" className="duration-700 transition-all" ref={canvasRef} style={{ background: "white" }} />;
 };
 
 export default CanvasAnimation;
