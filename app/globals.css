@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 .papi-container{
-    @apply my-auto mx-auto p-10 rounded-2xl shadow-lg bg-white dark:bg-zinc-950  bg-opacity-70 dark:bg-opacity-80 backdrop-blur-md w-11/12 md:w-6/12 lg:w-4/12 xl:w-5/12 duration-500 transition-all;
+    @apply relative my-auto mx-auto p-10 rounded-2xl shadow-lg bg-white dark:bg-zinc-950  bg-opacity-70 dark:bg-opacity-80 backdrop-blur-md w-11/12 md:w-6/12 lg:w-4/12 xl:w-5/12 duration-500 transition-all;
 }

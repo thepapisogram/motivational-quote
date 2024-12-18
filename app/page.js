@@ -129,8 +129,23 @@ export default function Home() {
                     <div data-aos="fade-up" data-aos-duration="1000" data-aos-offset="-5900" data-aos-delay="1000">
                         <Link href={`/quote?category=${pickerValue.quote}`} className='block mx-auto text-center border-2 border-green-700 hover:border-green-700 text-green-700 hover:bg-green-700 hover:text-white py-2 w-9/12 rounded-full duration-500 transition-all hover:rounded-t-none'>Proceed</Link>
                     </div>
+                    <div className='text-center mt-4'>
+                        <p onClick={() => document.getElementById('my_modal_1').showModal()} className='w-max mx-auto cursor-pointer text-green-950 hover:text-green-700 transition-all duration-700'>Play Quotable Video</p>
+                    </div>
                 </div>
             </main>
+            
+            <dialog id="my_modal_1" className="modal">
+                <div className="modal-box">
+                    <video className='rounded-lg shadow-md border-4' src="/video.mp4" controls></video>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            {/* if there is a button in form, it will close the modal */}
+                            <button className="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
             </>
             )}
         </>
