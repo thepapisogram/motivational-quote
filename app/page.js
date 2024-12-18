@@ -53,7 +53,7 @@ export default function Home() {
                                 setLoading(false);
                             }, 2000)
                         }, 1000);
-                    }, 1000);
+                    }, 2000);
                 }, 700)
             }, 2000);
         }, 2000);
@@ -67,11 +67,10 @@ export default function Home() {
     return (
         <>
             {loading && (
-                <div className={clsx("fixed top-0 left-0 flex gap-5 items-center justify-center h-full w-full duration-700 transition-all", {
+                <div className={clsx("fixed top-0 left-0 flex flex-col gap-5 items-center justify-center h-full w-full duration-700 transition-all select-none", {
                     "bg-zinc-950": phase1,
                     "bg-white": phase2,
-                    "bg-[#1b6d39]": phase6
-                    // "bg-[linear-gradient(to_right,_#1b6d39,_#7ba4b5)]": phase6
+                    "bg-gradient-to-br from-green-700 to-green-900": phase6
                 })}>
                     <div data-aos="fade-down" data-aos-duration="1000">
                         <h1 className={clsx("text-4xl md:text-6xl font-bold tracking-wide duration-700 transition-all", {
@@ -80,17 +79,17 @@ export default function Home() {
                             "opacity-0": phase3,
                             "hidden": phase4
                         })}>
-                            <LoadingFont text="Quotable" />
+                            <RubikFont text="Quotable" />
                         </h1>
                     </div>
                     <div data-aos="fade-up" data-aos-duration="1000">
-                        <h1 className={clsx("text-xl font-bold tracking-widest duration-700 transition-all", {
+                        <h1 className={clsx("text-xl font-bold tracking-widest duration-700 capitalize transition-all", {
                             "text-white": phase1,
                             "text-green-600": phase2,
                             "opacity-0": phase3,
                             "hidden": phase4
                         })}>
-                            <LoadingFont text="BY GROUP 5" />
+                            <LoadingFont text="Be happy with Quotable" />
                         </h1>
                     </div>
                     {phase4 && (
@@ -117,8 +116,8 @@ export default function Home() {
                             {Object.keys(selections).map(name => (
                                 <Picker.Column key={name} name={name}>
                                     {selections[name].map(option => (
-                                        <Picker.Item className={clsx("duration-200 text-lg transition-all", {
-                                            "text-green-500 tracking-widest font-medium text-xl border-y-2 border-green-700": option === pickerValue.quote
+                                        <Picker.Item className={clsx("duration-200 text-lg transition-all capitalize", {
+                                            "text-green-700 tracking-widest font-bold text-xl border-y-2 border-green-700": option === pickerValue.quote
                                         })} key={option} value={option}>
                                             {option}
                                         </Picker.Item>
@@ -128,7 +127,7 @@ export default function Home() {
                         </Picker>
                     </div>
                     <div data-aos="fade-up" data-aos-duration="1000" data-aos-offset="-5900" data-aos-delay="1000">
-                        <Link href={`/quote?category=${pickerValue.quote}`} className='block mx-auto text-center border-2 border-green-700 hover:border-green-700 text-green-700 hover:bg-green-700 hover:text-white py-2 w-9/12 rounded-full duration-500 transition-all'>Proceed</Link>
+                        <Link href={`/quote?category=${pickerValue.quote}`} className='block mx-auto text-center border-2 border-green-700 hover:border-green-700 text-green-700 hover:bg-green-700 hover:text-white py-2 w-9/12 rounded-full duration-500 transition-all hover:rounded-t-none'>Proceed</Link>
                     </div>
                 </div>
             </main>

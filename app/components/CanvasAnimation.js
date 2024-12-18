@@ -4,7 +4,7 @@ const CanvasAnimation = () => {
     const canvasRef = useRef(null);
     const circlesRef = useRef([]);
     const mouseRef = useRef({ x: undefined, y: undefined });
-    const colors = ["#ccc", "#038934", "#222"];
+    const colors = ["#ccc", "#038934", "black"];
     const maxRadius = 40;
 
     // Initialize circles
@@ -19,9 +19,8 @@ const CanvasAnimation = () => {
         const { innerWidth, innerHeight } = window;
         canvas.width = innerWidth;
         canvas.height = innerHeight;
-        canvas.style.background = "linear-gradient(to right, #1b6d39, #7ba4b5)";
 
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 80; i++) {
             const radius = Math.floor(Math.random() * 30);
             const x = Math.random() * (innerWidth - radius * 2) + radius;
             const y = Math.random() * (innerHeight - radius * 2) + radius;
@@ -51,7 +50,7 @@ const CanvasAnimation = () => {
             this.context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
             this.context.fillStyle = this.color;
             this.context.fill();
-            this.context.strokeStyle = "black";
+            this.context.strokeStyle = "#111";
             this.context.stroke();
         };
 
@@ -136,7 +135,7 @@ const CanvasAnimation = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    return <canvas data-aos="fade-in" data-aos-duration="3000" className="duration-700 transition-all" ref={canvasRef} style={{ background: "white" }} />;
+    return <canvas data-aos="fade-in" data-aos-duration="3000" className="duration-700 transition-all w-svw h-svh bg-gradient-to-br from-green-700 to-green-900" ref={canvasRef} />;
 };
 
 export default CanvasAnimation;

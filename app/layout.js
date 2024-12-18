@@ -5,7 +5,8 @@ const inter = Rubik({ weight: "400", subsets: ['latin']});
 
 export const metadata = {
   title: "Motivational Quote",
-  description: "Developed by Group 5",
+  description: "Be happy with quotable",
+  authors: [{ name: "Group 5" }],
 };
 
 export default function RootLayout({ children }) {
