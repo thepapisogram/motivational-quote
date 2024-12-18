@@ -37,7 +37,7 @@ export default function Home () {
       return;
     }
 
-    const text = quote.quote;
+    const text = `${quote.quote}. By ${quote.author}`;
     if (!text) {
       alert("No text found to read!");
       return;
@@ -46,7 +46,7 @@ export default function Home () {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = "en-US"; // Set the language (e.g., "en-US" for English)
     utterance.rate = 1; // Set the speed of the speech
-    utterance.pitch = 1.5; // Set the pitch of the speech
+    utterance.pitch = 1; // Set the pitch of the speech
 
     window.speechSynthesis.speak(utterance);
   };
