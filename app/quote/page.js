@@ -93,7 +93,7 @@ export default function Home () {
           <div className="grid">
             {!loading && (
               <audio autoPlay loop preload="auto">
-                <source src="/sound.mp3" type="audio/mpeg" />
+                <source src="/sound_v2.mp3" type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
             )}
